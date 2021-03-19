@@ -11,19 +11,17 @@ exports.up = function(knex) {
     
     .createTable('resources', tbl => {
         tbl.increments('resource_id')
-        tbl.string('resource_name').notNullable().unique()
+        tbl.string('resource_name')
     })
 
     .createTable('tasks', tbl => {
         tbl.increments('task_id')
         tbl.string('task_description').notNullable()
-        tbl.boolean('task_completed')
-        tbl.string('project_id')
     })
   };
   
   exports.down = function(knex) {
     return knex.schema
-      .dropTableIfExists('projects')
+      .dropTableIfExists('projects','resources','tasks')
   };
   
